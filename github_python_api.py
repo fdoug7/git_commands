@@ -52,12 +52,13 @@ def list_git_issues():
 
     if response.status_code == 200:
         issue = response.json()["items"]
+        for i in issue:
+            if i['state'] == 'open':
+                print('Title: %s; State: %s; ID %i;' % (i['title'], i['state'], i['number']))
     else:
         issue = [url, response.status_code]
+        print(issue)
 
-    for i in issue:
-        if i['state'] == 'open':
-            print('Title: %s; State: %s; ID %i;' % (i['title'], i['state'], i['number']))
 
 
 def close_git_issue(id):
